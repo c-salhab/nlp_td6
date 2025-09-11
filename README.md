@@ -178,11 +178,14 @@ uv run python src/llm_call.py
 En utilisant "structured output".<br/>
 Le résultat peut être une liste de vide.
 
-2. Faites une fonction video_names: list[str] -> comic_names: list[str]
+2. Faites une fonction video_names: list[str] -> comic_names: list[str] <br/>
 En utilisant "start your reply with ```csv\nvideo_name;comic_names"<br/>
 i.e. *sans* utiliser le structured output, mais permettant de donner une structure à la sortie de LLM
 
-3. Testez différentes bonnes pratiques, et documentez, dans un rapport, ce qui a marché ou non.
+3. Récupérer, dans la réponse du LLM, le nombre de input / output tokens. <br/>
+Calculer le prix et temps de calcul de votre prompt.
+
+4. Testez différentes bonnes pratiques, et documentez, dans un rapport, ce qui a marché ou non.
 
 ## Approche
 
