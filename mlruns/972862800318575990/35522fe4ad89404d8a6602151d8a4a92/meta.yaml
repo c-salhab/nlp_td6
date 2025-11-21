@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/35522fe4ad89404d8a6602151d8a4a92/artifacts
+deleted_time: 1763758002902
+end_time: 1763757967535
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: 35522fe4ad89404d8a6602151d8a4a92
+run_name: thoughtful-hound-228
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763757967506
+status: 3
+tags: []
+user_id: user

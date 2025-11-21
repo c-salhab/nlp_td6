@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/38ba5d0c728540fcac2997c82e493cb3/artifacts
+deleted_time: 1763758002981
+end_time: 1763756448768
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: 38ba5d0c728540fcac2997c82e493cb3
+run_name: omniscient-lamb-668
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763756448734
+status: 3
+tags: []
+user_id: user

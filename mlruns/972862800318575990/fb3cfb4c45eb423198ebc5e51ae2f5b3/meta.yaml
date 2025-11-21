@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/fb3cfb4c45eb423198ebc5e51ae2f5b3/artifacts
+deleted_time: 1763758002997
+end_time: 1763755591525
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: fb3cfb4c45eb423198ebc5e51ae2f5b3
+run_name: flawless-koi-908
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763755591476
+status: 3
+tags: []
+user_id: user

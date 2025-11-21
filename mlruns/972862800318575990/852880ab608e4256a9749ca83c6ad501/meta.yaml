@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/852880ab608e4256a9749ca83c6ad501/artifacts
+deleted_time: 1763758002932
+end_time: 1763756925584
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: 852880ab608e4256a9749ca83c6ad501
+run_name: upset-grouse-318
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763756925229
+status: 3
+tags: []
+user_id: user

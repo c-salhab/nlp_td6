@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/bda59846e3324a9db2c2b505fb44ff20/artifacts
+deleted_time: 1763758002982
+end_time: 1763756385615
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: bda59846e3324a9db2c2b505fb44ff20
+run_name: bright-shrew-944
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763756385551
+status: 3
+tags: []
+user_id: user

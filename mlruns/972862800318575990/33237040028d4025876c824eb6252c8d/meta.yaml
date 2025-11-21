@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/33237040028d4025876c824eb6252c8d/artifacts
+end_time: 1763758054184
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: 33237040028d4025876c824eb6252c8d
+run_name: magnificent-dove-56
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758054159
+status: 3
+tags: []
+user_id: user

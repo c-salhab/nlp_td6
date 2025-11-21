@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/90fd8425add149988bf58809f202863f/artifacts
+deleted_time: 1763758002933
+end_time: 1763757886605
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: 90fd8425add149988bf58809f202863f
+run_name: righteous-hound-600
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763757886583
+status: 3
+tags: []
+user_id: user

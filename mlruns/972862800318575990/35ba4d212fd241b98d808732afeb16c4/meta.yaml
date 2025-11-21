@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/35ba4d212fd241b98d808732afeb16c4/artifacts
+deleted_time: 1763758002935
+end_time: 1763757834695
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: 35ba4d212fd241b98d808732afeb16c4
+run_name: placid-sheep-3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763757834671
+status: 3
+tags: []
+user_id: user

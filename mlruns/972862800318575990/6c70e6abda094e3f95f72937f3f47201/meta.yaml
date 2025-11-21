@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/6c70e6abda094e3f95f72937f3f47201/artifacts
+end_time: 1763758181538
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: 6c70e6abda094e3f95f72937f3f47201
+run_name: delightful-frog-177
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758181515
+status: 3
+tags: []
+user_id: user

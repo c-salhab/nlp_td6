@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/4ceb2dfd4bab40c3b02353abd9dd6d64/artifacts
+end_time: 1763758528231
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: 4ceb2dfd4bab40c3b02353abd9dd6d64
+run_name: masked-sponge-40
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758528202
+status: 3
+tags: []
+user_id: user

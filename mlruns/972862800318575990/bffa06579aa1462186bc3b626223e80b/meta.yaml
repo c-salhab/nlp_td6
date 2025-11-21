@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/bffa06579aa1462186bc3b626223e80b/artifacts
+end_time: 1763758055891
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: bffa06579aa1462186bc3b626223e80b
+run_name: able-panda-160
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758055864
+status: 3
+tags: []
+user_id: user

@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/1ab18b84106b47278badb2e0e66432cc/artifacts
+end_time: 1763758179877
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: 1ab18b84106b47278badb2e0e66432cc
+run_name: redolent-shrimp-102
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758179854
+status: 3
+tags: []
+user_id: user

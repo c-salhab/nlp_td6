@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/2698d04c0bc641a5872a0f8cff417ec9/artifacts
+deleted_time: 1763758002963
+end_time: 1763756578906
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: 2698d04c0bc641a5872a0f8cff417ec9
+run_name: nervous-crow-1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763756578881
+status: 3
+tags: []
+user_id: user

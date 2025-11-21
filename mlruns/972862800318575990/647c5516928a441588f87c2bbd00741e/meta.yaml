@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/647c5516928a441588f87c2bbd00741e/artifacts
+end_time: 1763758402073
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: 647c5516928a441588f87c2bbd00741e
+run_name: blushing-swan-345
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758402043
+status: 3
+tags: []
+user_id: user

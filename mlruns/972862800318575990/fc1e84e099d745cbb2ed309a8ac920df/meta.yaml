@@ -1,0 +1,15 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/fc1e84e099d745cbb2ed309a8ac920df/artifacts
+deleted_time: 1763758002956
+end_time: 1763756587712
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: deleted
+run_id: fc1e84e099d745cbb2ed309a8ac920df
+run_name: classy-penguin-364
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763756587688
+status: 3
+tags: []
+user_id: user

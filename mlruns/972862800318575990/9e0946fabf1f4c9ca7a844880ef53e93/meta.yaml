@@ -1,0 +1,14 @@
+artifact_uri: file:///home/user/nlp_td6/mlruns/972862800318575990/9e0946fabf1f4c9ca7a844880ef53e93/artifacts
+end_time: 1763758397610
+entry_point_name: ''
+experiment_id: '972862800318575990'
+lifecycle_stage: active
+run_id: 9e0946fabf1f4c9ca7a844880ef53e93
+run_name: adorable-sheep-155
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763758397571
+status: 3
+tags: []
+user_id: user

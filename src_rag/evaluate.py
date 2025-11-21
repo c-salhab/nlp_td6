@@ -156,4 +156,3 @@ if __name__ == "__main__":
     model_config = {"chunk_size": 512}
     # run_evaluate_retrieval({"model": model_config})
     run_evaluate_reply({"model": model_config})
-
