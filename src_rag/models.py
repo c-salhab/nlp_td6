@@ -38,7 +38,7 @@ class RAG:
             if filename in self._loaded_files:
                 continue
 
-            with open(filename) as f:
+            with open(filename, "r", encoding="utf-8", errors="ignore") as f:
                 texts.append(f.read())
                 self._loaded_files.add(filename)
 

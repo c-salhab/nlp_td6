@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/44314cb95b3842908cd5aacc52431cad/artifacts
+end_time: 1763812175904
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 44314cb95b3842908cd5aacc52431cad
+run_name: skittish-mouse-883
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763812175555
+status: 3
+tags: []
+user_id: issom

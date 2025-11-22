@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/262c69fa08084532a0e52f4d18498f37/artifacts
+end_time: 1763812653242
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 262c69fa08084532a0e52f4d18498f37
+run_name: peaceful-snail-897
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763812653016
+status: 3
+tags: []
+user_id: issom

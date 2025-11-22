@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/ebd8b2808e484f5d8b9840e42b6573be/artifacts
+end_time: 1763810462937
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: ebd8b2808e484f5d8b9840e42b6573be
+run_name: rambunctious-jay-49
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763810462777
+status: 3
+tags: []
+user_id: issom

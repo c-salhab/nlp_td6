@@ -34,7 +34,7 @@ def run_evaluate_retrieval(config, rag=None):
     rag = rag or models.get_model(config)
     score = evaluate_retrieval(rag, FILENAMES, DF.dropna())
 
-    description = str(config["model"])
+    description = str(config.get("model", {})) #str(config["model"])
     _push_mlflow_result(score, config, description)
     
     return rag
@@ -45,7 +45,7 @@ def run_evaluate_reply(config, rag=None):
     indexes = range(2, len(DF), 10)
     score = evaluate_reply(rag, FILENAMES, DF.iloc[indexes])
 
-    description = str(config["model"])
+    description =str(config.get("model", {}))#str(config["model"])
     _push_mlflow_result(score, config, description)
     
     return rag
@@ -154,6 +154,6 @@ def calc_semantic_similarity(generated_answer: str, reference_answer: str) -> fl
 
 if __name__ == "__main__":
     model_config = {"chunk_size": 512}
-    # run_evaluate_retrieval({"model": model_config})
+    run_evaluate_retrieval({"model": model_config})
     run_evaluate_reply({"model": model_config})
 
