@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/537f438a1615473cac70812053e27a1c/artifacts
+end_time: 1764420833765
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 537f438a1615473cac70812053e27a1c
+run_name: stately-toad-823
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764420833506
+status: 3
+tags: []
+user_id: issom

@@ -1,0 +1,8 @@
+{
+  "model": {
+    "chunk_size": {
+      "size": 500,
+      "overlap": 100
+    }
+  }
+}

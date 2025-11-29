@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/acd073af020c4e9e9c4de89784dbfc15/artifacts
+end_time: 1764420459101
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: acd073af020c4e9e9c4de89784dbfc15
+run_name: amusing-hen-671
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764420458776
+status: 3
+tags: []
+user_id: issom

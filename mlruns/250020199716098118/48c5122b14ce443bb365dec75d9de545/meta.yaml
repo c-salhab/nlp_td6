@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/48c5122b14ce443bb365dec75d9de545/artifacts
+end_time: 1764411240283
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 48c5122b14ce443bb365dec75d9de545
+run_name: nebulous-shrew-31
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764411240022
+status: 3
+tags: []
+user_id: issom

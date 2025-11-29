@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/a87c289c1f884aa398e9fcd9b86f78db/artifacts
+end_time: 1764412849523
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: a87c289c1f884aa398e9fcd9b86f78db
+run_name: rogue-steed-729
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764412849263
+status: 3
+tags: []
+user_id: issom

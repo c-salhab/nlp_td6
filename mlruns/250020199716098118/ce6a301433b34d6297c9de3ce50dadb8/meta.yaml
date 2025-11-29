@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/ce6a301433b34d6297c9de3ce50dadb8/artifacts
+end_time: 1764417127092
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: ce6a301433b34d6297c9de3ce50dadb8
+run_name: sedate-stoat-868
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764417126710
+status: 3
+tags: []
+user_id: issom

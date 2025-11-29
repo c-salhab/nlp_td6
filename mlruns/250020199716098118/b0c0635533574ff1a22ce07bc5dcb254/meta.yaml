@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/b0c0635533574ff1a22ce07bc5dcb254/artifacts
+end_time: 1764425881456
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: b0c0635533574ff1a22ce07bc5dcb254
+run_name: zealous-cod-347
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764425881055
+status: 3
+tags: []
+user_id: issom

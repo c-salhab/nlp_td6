@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/43960e2b0b984bbca684849b15e4b08b/artifacts
+end_time: 1764413161816
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 43960e2b0b984bbca684849b15e4b08b
+run_name: clean-croc-99
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764413161657
+status: 3
+tags: []
+user_id: issom

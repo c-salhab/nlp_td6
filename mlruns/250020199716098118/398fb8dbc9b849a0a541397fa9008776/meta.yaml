@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/398fb8dbc9b849a0a541397fa9008776/artifacts
+end_time: 1764423937410
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 398fb8dbc9b849a0a541397fa9008776
+run_name: sassy-boar-862
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764423937139
+status: 3
+tags: []
+user_id: issom

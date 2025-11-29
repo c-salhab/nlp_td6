@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/8c728cb3fc9f46d887d1d2bd4a7f6fec/artifacts
+end_time: 1764418971450
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 8c728cb3fc9f46d887d1d2bd4a7f6fec
+run_name: big-whale-528
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764418971321
+status: 3
+tags: []
+user_id: issom

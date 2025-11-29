@@ -1,0 +1,1 @@
+{'chunk_size': {'size': 500, 'overlap': 150}, 'top_k': 10}

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/9b73e6ecc69d47f4892a43d56b32ed6e/artifacts
+end_time: 1764427818997
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 9b73e6ecc69d47f4892a43d56b32ed6e
+run_name: popular-stoat-925
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764427818628
+status: 3
+tags: []
+user_id: issom

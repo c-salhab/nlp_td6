@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/cfd8b4afa9a746beb7a92aa0e1af65e0/artifacts
+end_time: 1764419599695
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: cfd8b4afa9a746beb7a92aa0e1af65e0
+run_name: loud-moth-319
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764419599450
+status: 3
+tags: []
+user_id: issom

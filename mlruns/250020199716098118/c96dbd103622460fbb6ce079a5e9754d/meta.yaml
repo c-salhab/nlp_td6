@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/c96dbd103622460fbb6ce079a5e9754d/artifacts
+end_time: 1764418650391
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: c96dbd103622460fbb6ce079a5e9754d
+run_name: rare-stag-694
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764418650114
+status: 3
+tags: []
+user_id: issom

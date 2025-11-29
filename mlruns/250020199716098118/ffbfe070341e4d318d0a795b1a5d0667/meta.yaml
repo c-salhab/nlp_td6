@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/ffbfe070341e4d318d0a795b1a5d0667/artifacts
+end_time: 1764108958175
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: ffbfe070341e4d318d0a795b1a5d0667
+run_name: marvelous-skunk-715
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764108957948
+status: 3
+tags: []
+user_id: issom

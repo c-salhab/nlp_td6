@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/061d8f63c5654975a74ef4399b80fdec/artifacts
+end_time: 1764432554759
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 061d8f63c5654975a74ef4399b80fdec
+run_name: selective-loon-972
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764432554220
+status: 3
+tags: []
+user_id: issom

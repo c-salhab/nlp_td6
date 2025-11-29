@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/045c0a2966c244d58b9c061d02107493/artifacts
+end_time: 1764429983615
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 045c0a2966c244d58b9c061d02107493
+run_name: abundant-cod-206
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764429983310
+status: 3
+tags: []
+user_id: issom

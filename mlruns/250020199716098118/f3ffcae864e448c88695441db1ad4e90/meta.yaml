@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/f3ffcae864e448c88695441db1ad4e90/artifacts
+end_time: 1764359087910
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: f3ffcae864e448c88695441db1ad4e90
+run_name: sincere-lamb-880
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764359087353
+status: 3
+tags: []
+user_id: issom

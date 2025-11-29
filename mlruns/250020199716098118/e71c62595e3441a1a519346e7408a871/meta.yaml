@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/e71c62595e3441a1a519346e7408a871/artifacts
+end_time: 1764110170119
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: e71c62595e3441a1a519346e7408a871
+run_name: magnificent-ant-892
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764110169566
+status: 3
+tags: []
+user_id: issom

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/21fad8d8fd574ba082c8930059813baa/artifacts
+end_time: 1764419942372
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 21fad8d8fd574ba082c8930059813baa
+run_name: vaunted-whale-337
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764419942186
+status: 3
+tags: []
+user_id: issom

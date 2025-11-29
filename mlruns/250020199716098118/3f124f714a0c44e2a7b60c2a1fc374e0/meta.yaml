@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/3f124f714a0c44e2a7b60c2a1fc374e0/artifacts
+end_time: 1764417445977
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 3f124f714a0c44e2a7b60c2a1fc374e0
+run_name: nervous-goat-618
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764417445785
+status: 3
+tags: []
+user_id: issom

@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/8cf01ce875444c5982a2bb052d8f36aa/artifacts
+end_time: 1764417785119
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 8cf01ce875444c5982a2bb052d8f36aa
+run_name: handsome-tern-847
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764417784985
+status: 3
+tags: []
+user_id: issom

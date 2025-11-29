@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/2f9354b26e894cc1812219cc7c6091a6/artifacts
+end_time: 1764425211682
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: 2f9354b26e894cc1812219cc7c6091a6
+run_name: luminous-eel-80
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764425211478
+status: 3
+tags: []
+user_id: issom
