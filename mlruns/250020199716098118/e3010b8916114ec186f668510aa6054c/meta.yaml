@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/issom/nlp_td6/mlruns/250020199716098118/e3010b8916114ec186f668510aa6054c/artifacts
+end_time: 1764505453957
+entry_point_name: ''
+experiment_id: '250020199716098118'
+lifecycle_stage: active
+run_id: e3010b8916114ec186f668510aa6054c
+run_name: wise-skunk-754
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764505453741
+status: 3
+tags: []
+user_id: issom

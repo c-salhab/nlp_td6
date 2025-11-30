@@ -3,14 +3,19 @@ import re
 import tiktoken
 import openai
 import yaml
-
+from dotenv import load_dotenv
+import os
 from FlagEmbedding import FlagModel
+
+load_dotenv()  # charge le fichier .env
 
 CONF = yaml.safe_load(open("config.yml"))
 
+GROQ_KEY = os.getenv("GROQ_KEY") or CONF.get("groq_key", "")
+
 CLIENT = openai.OpenAI(
     base_url="https://api.groq.com/openai/v1",
-    api_key=CONF["groq_key"],
+    api_key=GROQ_KEY,
 )
 
 tokenizer = tiktoken.get_encoding("cl100k_base")
@@ -26,7 +31,7 @@ def get_model(config):
 class RAG:
     def __init__(self, chunk_size=256, top_k=5):
         self._chunk_size = chunk_size
-        self._top_k = top_k          # 👈 maintenant c’est un vrai paramètre
+        self._top_k = top_k          
         self._embedder = None
         self._loaded_files = set()
         self._texts = []

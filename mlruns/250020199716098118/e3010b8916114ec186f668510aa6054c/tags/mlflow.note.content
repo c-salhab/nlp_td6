@@ -1,0 +1,1 @@
+{'chunk_size': 'small2big', 'top_k': 10, 'embedding_model': 'BAAI/bge-base-en-v1.5', 'generative_model': 'openai/gpt-oss-20b'}

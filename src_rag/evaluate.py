@@ -160,4 +160,4 @@ if __name__ == "__main__":
 
 #{"chunk_size": {"size": 512, "overlap": 50}}{"chunk_size": "small2big"},512
 #{"chunk_size": {"size": 512, "overlap": 10}}, 500,384,500 avec overlap 100,{"chunk_size": {"size": 500, "overlap": 50}}
-# {"chunk_size": {"size": 500, "overlap": 150}
+#{"chunk_size": {"size": 500, "overlap": 150}

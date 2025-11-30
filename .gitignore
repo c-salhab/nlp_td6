@@ -2,3 +2,5 @@ data/
 __pycache__/
 *~
 config.yml
+*.env
+.env.*
