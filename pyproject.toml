@@ -16,6 +16,7 @@ dependencies = [
     "seqeval>=1.2.2",
     "torch>=2.8.0",
     "transformers[torch]>=4.56.0",
+    "mlflow>=3.6.0",
 ]
 
 [tool.setuptools.packages.find]

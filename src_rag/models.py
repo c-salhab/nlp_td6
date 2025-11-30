@@ -3,8 +3,9 @@ import re
 import tiktoken
 import openai
 import yaml
+from rank_bm25 import BM25Okapi
 
-from FlagEmbedding import FlagModel
+from FlagEmbedding import FlagModel, FlagReranker
 
 CONF = yaml.safe_load(open("config.yml"))
 
@@ -23,9 +24,20 @@ def get_model(config):
 
 
 class RAG:
-    def __init__(self, chunk_size=256):
+    def __init__(self, chunk_size=256, overlap=0, use_headers=False, embedding_model=None, top_k=5,
+                 use_reranker=False, reranker_model=None, use_hybrid=False, hybrid_alpha=0.5):
         self._chunk_size = chunk_size
+        self._overlap = overlap
+        self._use_headers = use_headers
+        self._embedding_model = embedding_model or "BAAI/bge-base-en-v1.5"
+        self._top_k = top_k
+        self._use_reranker = use_reranker
+        self._reranker_model = reranker_model or "BAAI/bge-reranker-base"
+        self._use_hybrid = use_hybrid
+        self._hybrid_alpha = hybrid_alpha  # 0 = full BM25, 1 = full embedding
         self._embedder = None
+        self._reranker = None
+        self._bm25 = None
         self._loaded_files = set()
         self._texts = []
         self._chunks = []
@@ -53,6 +65,11 @@ class RAG:
             self._corpus_embedding = np.vstack([self._corpus_embedding, new_embedding])
         else:
             self._corpus_embedding = new_embedding
+        
+        # Initialiser BM25 si hybrid search active
+        if self._use_hybrid:
+            tokenized_chunks = [chunk.lower().split() for chunk in self._chunks]
+            self._bm25 = BM25Okapi(tokenized_chunks)
 
     def get_corpus_embedding(self):
         return self._corpus_embedding
@@ -66,7 +83,12 @@ class RAG:
 
     def _compute_chunks(self, texts):
         return sum(
-            (chunk_markdown(txt, chunk_size=self._chunk_size) for txt in texts),
+            (chunk_markdown(
+                txt, 
+                chunk_size=self._chunk_size, 
+                overlap=self._overlap,
+                use_headers=self._use_headers
+            ) for txt in texts),
             [],
         )
 
@@ -77,12 +99,17 @@ class RAG:
     def get_embedder(self):
         if not self._embedder:
             self._embedder = FlagModel(
-                'BAAI/bge-base-en-v1.5',
+                self._embedding_model,
                 query_instruction_for_retrieval="Represent this sentence for searching relevant passages:",
                 use_fp16=True,
             )
 
         return self._embedder
+    
+    def get_reranker(self):
+        if not self._reranker and self._use_reranker:
+            self._reranker = FlagReranker(self._reranker_model, use_fp16=True)
+        return self._reranker
 
     def reply(self, query):
         prompt = self._build_prompt(query)
@@ -106,10 +133,47 @@ Query: {query}
 Answer:"""
 
     def _get_context(self, query):
-        query_embedding = self.embed_questions([query])
-        sim_scores = query_embedding @ self._corpus_embedding.T
-        indexes = list(np.argsort(sim_scores[0]))[-5:]
-        return [self._chunks[i] for i in indexes]
+        # Recuperer plus de candidats si on utilise le reranker
+        initial_k = self._top_k * 3 if self._use_reranker else self._top_k
+        
+        if self._use_hybrid and self._bm25:
+            # Hybrid search : combiner BM25 et embeddings
+            query_embedding = self.embed_questions([query])
+            embedding_scores = (query_embedding @ self._corpus_embedding.T)[0]
+            
+            # Normaliser les scores embedding entre 0 et 1
+            embedding_scores = (embedding_scores - embedding_scores.min()) / (embedding_scores.max() - embedding_scores.min() + 1e-8)
+            
+            # BM25 scores
+            tokenized_query = query.lower().split()
+            bm25_scores = np.array(self._bm25.get_scores(tokenized_query))
+            
+            # Normaliser les scores BM25 entre 0 et 1
+            if bm25_scores.max() > 0:
+                bm25_scores = (bm25_scores - bm25_scores.min()) / (bm25_scores.max() - bm25_scores.min() + 1e-8)
+            
+            # Combiner les scores
+            combined_scores = self._hybrid_alpha * embedding_scores + (1 - self._hybrid_alpha) * bm25_scores
+            indexes = list(np.argsort(combined_scores))[-initial_k:]
+        else:
+            # Recherche par embeddings uniquement
+            query_embedding = self.embed_questions([query])
+            sim_scores = query_embedding @ self._corpus_embedding.T
+            indexes = list(np.argsort(sim_scores[0]))[-initial_k:]
+        
+        candidates = [self._chunks[i] for i in indexes]
+        
+        # Re-ranking si active
+        if self._use_reranker:
+            reranker = self.get_reranker()
+            pairs = [[query, chunk] for chunk in candidates]
+            rerank_scores = reranker.compute_score(pairs)
+            
+            # Trier par score de reranking
+            sorted_indices = np.argsort(rerank_scores)[::-1]
+            candidates = [candidates[i] for i in sorted_indices[:self._top_k]]
+        
+        return candidates
     
 
 
@@ -156,16 +220,39 @@ def parse_markdown_sections(md_text: str) -> list[dict[str, str]]:
     return sections
 
 
-def chunk_markdown(md_text: str, chunk_size: int = 128) -> list[dict]:
+def chunk_markdown(md_text: str, chunk_size: int = 128, overlap: int = 0, use_headers: bool = False) -> list[str]:
+    """
+    Découpe un texte markdown en chunks.
+    
+    Args:
+        md_text: Le texte markdown à découper
+        chunk_size: Taille maximale de chaque chunk en tokens
+        overlap: Nombre de tokens de chevauchement entre chunks consécutifs
+        use_headers: Si True, préfixe chaque chunk avec la hiérarchie des headers (Small2Big)
+    
+    Returns:
+        Liste de strings représentant les chunks
+    """
     parsed_sections = parse_markdown_sections(md_text)
     chunks = []
+    
+    step = max(1, chunk_size - overlap)  # Eviter step <= 0
 
     for section in parsed_sections:
         tokens = tokenizer.encode(section["content"])
-        token_chunks = [tokens[i:i + chunk_size] for i in range(0, len(tokens), chunk_size) if tokens[i:i + chunk_size]]
-
-        for token_chunk in token_chunks:
-            chunk_text = tokenizer.decode(token_chunk)
-            chunks.append(chunk_text)
+        
+        # Construire le préfixe de contexte si use_headers est activé
+        header_prefix = ""
+        if use_headers and section["headers"]:
+            header_prefix = " > ".join(section["headers"]) + "\n"
+        
+        for i in range(0, len(tokens), step):
+            token_chunk = tokens[i:i + chunk_size]
+            if token_chunk:
+                chunk_text = tokenizer.decode(token_chunk)
+                if use_headers and header_prefix:
+                    chunks.append(header_prefix + chunk_text)
+                else:
+                    chunks.append(chunk_text)
 
     return chunks

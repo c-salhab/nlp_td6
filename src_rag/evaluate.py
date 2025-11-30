@@ -25,10 +25,33 @@ ENCODER = SentenceTransformer('all-MiniLM-L6-v2')
 
 
 def _load_ml_flow(conf):
-    mlflow.set_experiment("RAG_Movies_clean")
+    mlflow.set_experiment("RAG_Movies_Experiments")
 
 
 _load_ml_flow(CONF)
+
+
+def _build_run_name(config):
+    """Construit un nom de run explicite basé sur la configuration."""
+    model_config = config.get("model", {})
+    parts = []
+    
+    if "chunk_size" in model_config:
+        parts.append(f"chunk{model_config['chunk_size']}")
+    if model_config.get("overlap", 0) > 0:
+        parts.append(f"overlap{model_config['overlap']}")
+    if model_config.get("use_headers", False):
+        parts.append("headers")
+    if model_config.get("top_k", 5) != 5:
+        parts.append(f"top{model_config['top_k']}")
+    if model_config.get("use_reranker", False):
+        parts.append("reranker")
+    if model_config.get("use_hybrid", False):
+        parts.append(f"hybrid{model_config.get('hybrid_alpha', 0.5)}")
+    if "embedding_model" in model_config:
+        parts.append(model_config["embedding_model"].split("/")[-1])
+    
+    return "_".join(parts) if parts else "default"
 
 def run_evaluate_retrieval(config, rag=None):
     rag = rag or models.get_model(config)
@@ -52,10 +75,24 @@ def run_evaluate_reply(config, rag=None):
 
 
 def _push_mlflow_result(score, config, description=None):
-    with mlflow.start_run(description=description):
+    run_name = _build_run_name(config)
+    with mlflow.start_run(run_name=run_name, description=description):
         df = score.pop("df_result")
         mlflow.log_table(df, artifact_file="df.json")
         mlflow.log_metrics(score)
+
+        # Log les paramètres individuellement pour faciliter la comparaison
+        model_config = config.get("model", {})
+        mlflow.log_params({
+            "chunk_size": model_config.get("chunk_size", 256),
+            "overlap": model_config.get("overlap", 0),
+            "use_headers": model_config.get("use_headers", False),
+            "top_k": model_config.get("top_k", 5),
+            "use_reranker": model_config.get("use_reranker", False),
+            "use_hybrid": model_config.get("use_hybrid", False),
+            "hybrid_alpha": model_config.get("hybrid_alpha", 0.5),
+            "embedding_model": model_config.get("embedding_model", "BAAI/bge-base-en-v1.5"),
+        })
 
         config_no_key = {
             key: val for key, val in config.items() if not key.endswith("_key")
