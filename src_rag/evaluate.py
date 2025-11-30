@@ -48,6 +48,8 @@ def _build_run_name(config):
         parts.append("reranker")
     if model_config.get("use_hybrid", False):
         parts.append(f"hybrid{model_config.get('hybrid_alpha', 0.5)}")
+    if model_config.get("use_small2big", False):
+        parts.append(f"small2big_w{model_config.get('window_size', 1)}")
     if "embedding_model" in model_config:
         parts.append(model_config["embedding_model"].split("/")[-1])
     
@@ -92,6 +94,8 @@ def _push_mlflow_result(score, config, description=None):
             "use_hybrid": model_config.get("use_hybrid", False),
             "hybrid_alpha": model_config.get("hybrid_alpha", 0.5),
             "embedding_model": model_config.get("embedding_model", "BAAI/bge-base-en-v1.5"),
+            "use_small2big": model_config.get("use_small2big", False),
+            "window_size": model_config.get("window_size", 1),
         })
 
         config_no_key = {

@@ -25,7 +25,8 @@ def get_model(config):
 
 class RAG:
     def __init__(self, chunk_size=256, overlap=0, use_headers=False, embedding_model=None, top_k=5,
-                 use_reranker=False, reranker_model=None, use_hybrid=False, hybrid_alpha=0.5):
+                 use_reranker=False, reranker_model=None, use_hybrid=False, hybrid_alpha=0.5,
+                 use_small2big=False, window_size=1):
         self._chunk_size = chunk_size
         self._overlap = overlap
         self._use_headers = use_headers
@@ -35,6 +36,8 @@ class RAG:
         self._reranker_model = reranker_model or "BAAI/bge-reranker-base"
         self._use_hybrid = use_hybrid
         self._hybrid_alpha = hybrid_alpha  # 0 = full BM25, 1 = full embedding
+        self._use_small2big = use_small2big  # Small2Big: etendre avec chunks adjacents
+        self._window_size = window_size  # Nombre de chunks avant/apres a inclure
         self._embedder = None
         self._reranker = None
         self._bm25 = None
@@ -172,6 +175,22 @@ Answer:"""
             # Trier par score de reranking
             sorted_indices = np.argsort(rerank_scores)[::-1]
             candidates = [candidates[i] for i in sorted_indices[:self._top_k]]
+            indexes = [indexes[i] for i in sorted_indices[:self._top_k]]
+        
+        # Small2Big : etendre avec les chunks adjacents
+        if self._use_small2big:
+            expanded_candidates = []
+            seen_ranges = set()
+            for idx in indexes[:self._top_k]:
+                start = max(0, idx - self._window_size)
+                end = min(len(self._chunks), idx + self._window_size + 1)
+                range_key = (start, end)
+                if range_key not in seen_ranges:
+                    seen_ranges.add(range_key)
+                    # Concatener les chunks adjacents
+                    expanded = "\n".join(self._chunks[start:end])
+                    expanded_candidates.append(expanded)
+            return expanded_candidates
         
         return candidates
     
