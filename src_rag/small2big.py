@@ -16,8 +16,8 @@ class Small2BigRAG(RAG):
     - Large parent chunks are returned for context (better for LLM understanding)
     """
 
-    def __init__(self, small_chunk_size=128, large_chunk_size=512, overlap=0):
-        super().__init__(chunk_size=small_chunk_size, overlap=overlap)
+    def __init__(self, small_chunk_size=128, large_chunk_size=512, overlap=0, top_k=5, embedding_model='BAAI/bge-base-en-v1.5'):
+        super().__init__(chunk_size=small_chunk_size, overlap=overlap, top_k=top_k, embedding_model=embedding_model)
         self._small_chunk_size = small_chunk_size
         self._large_chunk_size = large_chunk_size
         self._large_chunks = []  # Store the larger parent chunks
@@ -81,8 +81,8 @@ class Small2BigRAG(RAG):
         query_embedding = self.embed_questions([query])
         sim_scores = query_embedding @ self._corpus_embedding.T
 
-        # Get top 5 small chunk indices
-        small_chunk_indices = list(np.argsort(sim_scores[0]))[-5:]
+        # Get top_k small chunk indices
+        small_chunk_indices = list(np.argsort(sim_scores[0]))[-self._top_k:]
 
         # Map to large chunks and deduplicate
         large_chunk_indices = set()

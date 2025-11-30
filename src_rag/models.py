@@ -25,7 +25,9 @@ def get_model(config):
             return Small2BigRAG(
                 small_chunk_size=model_config.get("small_chunk_size", 128),
                 large_chunk_size=model_config.get("large_chunk_size", 512),
-                overlap=model_config.get("overlap", 0)
+                overlap=model_config.get("overlap", 0),
+                top_k=model_config.get("top_k", 5),
+                embedding_model=model_config.get("embedding_model", 'BAAI/bge-base-en-v1.5')
             )
         else:
             return RAG(**{k: v for k, v in model_config.items() if k != "type"})
@@ -34,9 +36,11 @@ def get_model(config):
 
 
 class RAG:
-    def __init__(self, chunk_size=256, overlap=0):
+    def __init__(self, chunk_size=256, overlap=0, top_k=5, embedding_model='BAAI/bge-base-en-v1.5'):
         self._chunk_size = chunk_size
         self._overlap = overlap
+        self._top_k = top_k
+        self._embedding_model = embedding_model
         self._embedder = None
         self._loaded_files = set()
         self._texts = []
@@ -89,7 +93,7 @@ class RAG:
     def get_embedder(self):
         if not self._embedder:
             self._embedder = FlagModel(
-                'BAAI/bge-base-en-v1.5',
+                self._embedding_model,
                 query_instruction_for_retrieval="Represent this sentence for searching relevant passages:",
                 use_fp16=True,
             )
@@ -120,7 +124,7 @@ Answer:"""
     def _get_context(self, query):
         query_embedding = self.embed_questions([query])
         sim_scores = query_embedding @ self._corpus_embedding.T
-        indexes = list(np.argsort(sim_scores[0]))[-5:]
+        indexes = list(np.argsort(sim_scores[0]))[-self._top_k:]
         return [self._chunks[i] for i in indexes]
     
 
