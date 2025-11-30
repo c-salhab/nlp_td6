@@ -9,22 +9,38 @@ from FlagEmbedding import FlagModel
 CONF = yaml.safe_load(open("config.yml"))
 
 CLIENT = openai.OpenAI(
-    base_url="https://api.groq.com/openai/v1",
-    api_key=CONF["groq_key"],
+    base_url=CONF.get("xai_base_url", "https://api.x.ai/v1"),
+    api_key=CONF.get("xai_api_key", CONF.get("groq_key", "")),
 )
 
 tokenizer = tiktoken.get_encoding("cl100k_base")
 
 def get_model(config):
     if config:
-        return RAG(**config.get("model", {}))
+        model_config = config.get("model", {})
+        model_type = model_config.get("type", "standard")
+
+        if model_type == "small2big":
+            from src_rag.small2big import Small2BigRAG
+            return Small2BigRAG(
+                small_chunk_size=model_config.get("small_chunk_size", 128),
+                large_chunk_size=model_config.get("large_chunk_size", 512),
+                overlap=model_config.get("overlap", 0),
+                top_k=model_config.get("top_k", 5),
+                embedding_model=model_config.get("embedding_model", 'BAAI/bge-base-en-v1.5')
+            )
+        else:
+            return RAG(**{k: v for k, v in model_config.items() if k != "type"})
     else:
         return RAG()
 
 
 class RAG:
-    def __init__(self, chunk_size=256):
+    def __init__(self, chunk_size=256, overlap=0, top_k=5, embedding_model='BAAI/bge-base-en-v1.5'):
         self._chunk_size = chunk_size
+        self._overlap = overlap
+        self._top_k = top_k
+        self._embedding_model = embedding_model
         self._embedder = None
         self._loaded_files = set()
         self._texts = []
@@ -66,7 +82,7 @@ class RAG:
 
     def _compute_chunks(self, texts):
         return sum(
-            (chunk_markdown(txt, chunk_size=self._chunk_size) for txt in texts),
+            (chunk_markdown(txt, chunk_size=self._chunk_size, overlap=self._overlap) for txt in texts),
             [],
         )
 
@@ -77,7 +93,7 @@ class RAG:
     def get_embedder(self):
         if not self._embedder:
             self._embedder = FlagModel(
-                'BAAI/bge-base-en-v1.5',
+                self._embedding_model,
                 query_instruction_for_retrieval="Represent this sentence for searching relevant passages:",
                 use_fp16=True,
             )
@@ -88,7 +104,7 @@ class RAG:
         prompt = self._build_prompt(query)
         res = self._client.chat.completions.create(
             messages=[{"role": "user", "content": prompt}],
-            model="openai/gpt-oss-20b",
+            model=CONF.get("xai_model", CONF.get("groq_model", "grok-4-latest")),
         )
         return res.choices[0].message.content
         
@@ -108,7 +124,7 @@ Answer:"""
     def _get_context(self, query):
         query_embedding = self.embed_questions([query])
         sim_scores = query_embedding @ self._corpus_embedding.T
-        indexes = list(np.argsort(sim_scores[0]))[-5:]
+        indexes = list(np.argsort(sim_scores[0]))[-self._top_k:]
         return [self._chunks[i] for i in indexes]
     
 
@@ -156,13 +172,25 @@ def parse_markdown_sections(md_text: str) -> list[dict[str, str]]:
     return sections
 
 
-def chunk_markdown(md_text: str, chunk_size: int = 128) -> list[dict]:
+def chunk_markdown(md_text: str, chunk_size: int = 128, overlap: int = 0) -> list[dict]:
     parsed_sections = parse_markdown_sections(md_text)
     chunks = []
 
     for section in parsed_sections:
         tokens = tokenizer.encode(section["content"])
-        token_chunks = [tokens[i:i + chunk_size] for i in range(0, len(tokens), chunk_size) if tokens[i:i + chunk_size]]
+
+        # Calculate step size based on overlap
+        step_size = chunk_size - overlap if overlap > 0 else chunk_size
+
+        # Create overlapping chunks
+        token_chunks = []
+        for i in range(0, len(tokens), step_size):
+            chunk = tokens[i:i + chunk_size]
+            if chunk:  # Only add non-empty chunks
+                token_chunks.append(chunk)
+            # Break if we've reached the end and added the last chunk
+            if i + chunk_size >= len(tokens):
+                break
 
         for token_chunk in token_chunks:
             chunk_text = tokenizer.decode(token_chunk)

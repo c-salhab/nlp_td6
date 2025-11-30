@@ -57,11 +57,34 @@ def _push_mlflow_result(score, config, description=None):
         mlflow.log_table(df, artifact_file="df.json")
         mlflow.log_metrics(score)
 
+        # Log config as JSON file
         config_no_key = {
             key: val for key, val in config.items() if not key.endswith("_key")
         }
-
         mlflow.log_dict(config_no_key, "config.json")
+
+        # Log individual parameters for easy filtering in MLflow UI
+        model_config = config.get("model", {})
+        params_to_log = {
+            "chunk_size": model_config.get("chunk_size", None),
+            "overlap": model_config.get("overlap", 0),
+            "top_k": model_config.get("top_k", 5),
+            "model_type": model_config.get("type", "standard"),
+            "embedding_model": model_config.get("embedding_model", "BAAI/bge-base-en-v1.5"),
+        }
+
+        # Pour Small2Big, ajouter les paramètres spécifiques
+        if model_config.get("type") == "small2big":
+            params_to_log["small_chunk_size"] = model_config.get("small_chunk_size", 128)
+            params_to_log["large_chunk_size"] = model_config.get("large_chunk_size", 512)
+
+        # Logger seulement les paramètres non-None
+        params_to_log = {k: v for k, v in params_to_log.items() if v is not None}
+        mlflow.log_params(params_to_log)
+
+        # Log description comme tag pour filtrage facile
+        if description:
+            mlflow.set_tag("description", description)
 
 
 def evaluate_reply(rag, filenames, df):
